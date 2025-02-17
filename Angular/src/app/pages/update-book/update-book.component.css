@@ -1,0 +1,80 @@
+.form {
+  height: 100%;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  background-color: rgba(214, 214, 214, 0.767);
+  border-radius: 8px;
+  margin-top: 30px;
+}
+
+.datos {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.buscar {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.buscar button {
+  width: 30%;
+  background-color: var(--tercer-color);
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 10px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 5px;
+}
+
+input {
+  width: 50%;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #363636;
+}
+
+span {
+  font-weight: bold;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+}
+
+.btn button {
+  width: 30%;
+  background-color: rgba(255, 0, 0, 0.767);
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.btn button:hover {
+  background-color: rgba(6, 255, 6, 0.9);
+}

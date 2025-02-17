@@ -1,0 +1,20 @@
+<main>
+  <div class="rotulo">
+    <h1>Libros</h1>
+  </div>
+  <div class="buscar">
+    <label><span>Id del libro</span><input [(ngModel)]="libroId" name="libroId" type="number"></label>
+    <button (click)="buscarLibro()">Buscar</button>
+  </div>
+  <section *ngIf="arrayBooks.length > 0; else sinLibros">
+    <ng-container *ngFor="let book of arrayBooks; let isEven = even">
+      <app-card [bookDesdePadre]="book" [isEven]="isEven" (libroABorrar)="libroABorrar($event)">
+      </app-card>
+    </ng-container>
+  </section>
+  <ng-template #sinLibros>
+    <div class="vacio">
+      <h2>No hay libros disponibles</h2>
+    </div>
+  </ng-template>
+</main>

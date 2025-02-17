@@ -1,0 +1,75 @@
+
+main {
+  width: 100%;
+  height: 75vh;
+  display: flex;
+  flex-direction: column;
+justify-content: space-between;
+
+}
+
+.hero {
+  height: 100%;
+  background: url('https://images.pexels.com/photos/1290141/pexels-photo-1290141.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center/cover;
+
+
+}
+
+.sombreado {
+  width: 100%;
+  height: 100%;
+  background-color: #00000081;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+
+.sombreado h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.sombreado p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+
+.sombreado button:hover {
+  background-color: #6b4226;
+}
+
+
+.anuncios {
+  display: flex;
+  justify-content: space-around;
+  background-color: #f5f5f5;
+  padding: 50px;
+}
+
+.cartel {
+  text-align: center;
+  max-width: 300px;
+}
+
+.cartel h3 {
+  font-size: 1.5rem;
+
+}
+
+.cartel p {
+  font-size: 1rem;
+}
+
+
+footer {
+  position: sticky;
+  bottom: -10px;
+  text-align: center;
+  padding: 20px;
+  background-color: #2c3e50;
+  color: white;
+}

@@ -1,0 +1,58 @@
+
+  <div class="container">
+    <div class="izquierda">
+      <div class="imagen">
+        <img src="{{ user.photo }}" alt="Foto perfil">
+      </div>
+
+      <div class="titulo">
+        <h2>{{ nombreCompleto() }}</h2>
+      </div>
+
+      <div class="datos">
+        <h2>Nombre:</h2>
+        <input type="text" value="{{ user.name }}">
+      </div>
+
+      <div class="datos">
+        <h2>Apellidos:</h2>
+        <input type="text" value="{{ user.last_name }}" >
+      </div>
+
+      <div class="datos">
+        <h2>Correo:</h2>
+        <input type="text" value="{{ user.email }}">
+      </div>
+    </div>
+    <div class="derecha">
+      <div class="encabezado">
+        <h2>Cambia tu perfil</h2>
+      </div>
+
+      <div class="form">
+        <form>
+          <div class="input">
+            <label><span>Nombre</span><input type="text" #nuevoNombre></label>
+          </div>
+
+          <div class="input">
+            <label><span>Apellidos</span><input type="text"  #nuevoApellido></label>
+          </div>
+
+          <div class="input">
+            <label><span>Correo</span><input type="email" #nuevoCorreo></label>
+          </div>
+
+          <div class="input">
+            <label><span>Url</span><input type="url" #nuevaFoto></label>
+          </div>
+
+          <div class="boton" >
+            <button type="button" (click)="lanzarFuncion(nuevoNombre.value, nuevoApellido.value, nuevoCorreo.value, nuevaFoto.value)" >Escribir</button>
+          </div>
+          <h1 [class] ="miClase" >{{ mensaje }}</h1>
+        </form>
+      </div>
+
+    </div>
+  </div>

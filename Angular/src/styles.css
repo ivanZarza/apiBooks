@@ -1,0 +1,40 @@
+
+:root {
+  --primer-color: #fdd281;
+  --segundo-color: #deb887;
+  --tercer-color: #f37b25;  
+  --hover-color: #ff1900;
+  --background-color: #b6c5c9;
+  --texto-color: #572d11;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif; 
+}
+
+.custom-toast {
+  width: 200px;
+  background-color: #4CAF50 ; 
+  color: white ; 
+  border-radius: 8px; 
+  padding: 16px;
+  font-size: 16px; 
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.custom-toast-error {
+  width: 200px;
+  background-color: #f44336 ; 
+  color: white ; 
+  border-radius: 8px; 
+  padding: 16px;
+  font-size: 16px; 
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}

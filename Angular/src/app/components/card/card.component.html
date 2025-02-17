@@ -1,0 +1,20 @@
+<div class="libro">
+  <div class="x">
+    <div class="id">
+    <p>{{ bookDesdePadre.id_book | pipeRef }}</p>
+  </div>
+    <button (click)="borrarLibro(bookDesdePadre.id_book)">X</button>
+  </div>
+  <div class="img">
+    <img src="{{bookDesdePadre.photo}}" alt="{{bookDesdePadre.title}}">
+  </div>
+  <div class="detalles">
+    <h2>{{ bookDesdePadre.title }}</h2>
+    <p>{{ bookDesdePadre.type }}</p>
+    <p>{{ bookDesdePadre.author }}</p>
+    <p>{{ bookDesdePadre.price }}</p>
+  </div>
+  <div class="boton">
+    <button [ngClass]="isEven ? 'even' : 'noEven' ">Comprar</button>
+  </div>
+</div>

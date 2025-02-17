@@ -1,0 +1,31 @@
+.footer {
+  width: 100%;
+position: fixed;
+bottom: 0;
+background-image:radial-gradient( circle,var(--primer-color)  40%, var(--tercer-color) 100%);
+padding: 10px;
+text-align: center;
+color: white;
+box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+}
+
+
+.footer h2 {
+  color: var(--texto-color);
+  margin-bottom: 10px;
+}
+
+.redes {
+  display: flex;
+  justify-content: center;
+  gap: 0px 40px;
+}
+
+.redes a {
+  display: inline-block;
+}
+
+.redes img {
+  width: 30px;
+  height: 30px;
+}

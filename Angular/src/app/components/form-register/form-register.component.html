@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="form">
+    <h2>Registro</h2>
+    <form [formGroup]="registerForm">
+
+      <div class="seccion">
+        <label><span>Nombre</span>
+          <input type="text" formControlName="nombre"
+            [ngClass]="{'invalido': (registerForm.get('nombre').dirty || registerForm.get('nombre').touched) && !registerForm.get('nombre').valid}">
+        </label>
+        <div class="mensaje"
+          *ngIf="(registerForm.get('nombre').dirty || registerForm.get('nombre').touched) && !registerForm.get('nombre').valid">
+          <p class="error">El campo es obligatorio</p>
+        </div>
+      </div>
+
+      <div class="seccion">
+        <label><span>Apellidos</span><input type="text" formControlName="apellidos"
+            [ngClass]="{'invalido': (registerForm.get('apellidos').dirty || registerForm.get('apellidos').touched) && !registerForm.get('apellidos').valid}"></label>
+        <div class="mensaje"
+          *ngIf="(registerForm.get('apellidos').dirty || registerForm.get('apellidos').touched) && !registerForm.get('apellidos').valid">
+          <p class="error">El campo es obligatorio</p>
+        </div>
+      </div>
+
+      <div class="seccion">
+        <label><span>Email</span>
+          <input type="email" formControlName="email"
+            [ngClass]="{'invalido': (registerForm.get('email').dirty || registerForm.get('email').touched) && !registerForm.get('email').valid}">
+        </label>
+        <div
+          *ngIf="(registerForm.get('email').dirty || registerForm.get('email').touched) && !registerForm.get('email').valid"
+          class="mensaje">
+          <p *ngIf="registerForm.get('email').errors.required" class="error">El campo es obligatorio</p>
+          <p *ngIf="registerForm.get('email').errors.email" class="error">Introduce un email válido</p>
+        </div>
+      </div>
+
+      <div class="seccion">
+        <label><span>URL</span><input type="url" formControlName="url"
+            [ngClass]="{'invalido': (registerForm.get('url').dirty || registerForm.get('url').touched) && !registerForm.get('url').valid}"></label>
+        <div class="mensaje"
+          *ngIf="(registerForm.get('url').dirty || registerForm.get('url').touched) && !registerForm.get('url').valid">
+          <p *ngIf="registerForm.get('url').errors.required" class="error">El campo es obligatorio</p>
+        </div>
+      </div>
+
+      <div class="seccion">
+        <label><span>Contraseña</span><input type="password" formControlName="password"
+            [ngClass]="{'invalido': (registerForm.get('password').dirty || registerForm.get('password').touched) && !registerForm.get('password').valid}"></label>
+        <div
+          *ngIf="(registerForm.get('password').dirty || registerForm.get('password').touched) && !registerForm.get('password').valid"
+          class="mensaje">
+          <p *ngIf="registerForm.get('password').errors.required" class="error">El campo es obligatorio</p>
+          <p *ngIf="registerForm.get('password').errors.minlength" class="error">La contraseña debe tener 6 caracteres</p>
+        </div>
+      </div>
+
+        <div class="seccion">
+          <label><span>Repetir Contraseña</span><input type="password" formControlName="password2"></label>
+          <div *ngIf="(registerForm.get('password2').dirty || registerForm.get('password2').touched) && !registerForm.get('password2').valid" class="mensaje">
+            <p *ngIf="registerForm.get('password2').errors.required" class="error">El campo es obligatorio</p>
+            <p *ngIf="registerForm.get('password2').errors.diferentes" class="error">Las contraseñas no coinciden</p>
+        </div>
+      </div>
+        <div class="btn">
+          <button [disabled]="registerForm.invalid" (click)="prueba()">Registrarse</button>
+        </div>
+    </form>
+  </div>
+</div>

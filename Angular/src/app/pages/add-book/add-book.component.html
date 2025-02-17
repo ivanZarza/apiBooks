@@ -1,0 +1,16 @@
+<div class="form">
+  <form>
+    <div class="datos">
+      <label><span>Id del libro</span><input [(ngModel)]="libroId" name="libroId" type="number" required></label>
+      <label><span>Id del usuario</span><input [(ngModel)]="usuarioId" name="usuarioId" type="number" required></label>
+      <label><span>Titulo del libro</span><input [(ngModel)]="titulo" name="titulo" type="text" required></label>
+      <label><span>Estilo del libro</span><input [(ngModel)]="estilo" name="estilo" type="text" required></label>
+      <label><span>Autor del libro</span><input [(ngModel)]="autor" name="autor" type="text" required></label>
+      <label><span>Precio</span><input [(ngModel)]="precio" name="precio" type="number" required></label>
+      <label><span>Url de la imagen</span><input [(ngModel)]="imagenUrl" name="imagenUrl" type="text" required></label>
+    </div>
+    <div class="btn">
+      <button type="button" (click)="agregarLibro()">Agregar libro</button>
+    </div>
+  </form>
+</div>

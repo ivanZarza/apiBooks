@@ -1,0 +1,31 @@
+<div class="container">
+
+  <div class="form">
+    <h1>Login</h1>
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+      <div class="form-group">
+        <label><span>Email</span><input type="email" name="email" [(ngModel)]="usuario.email" #emailId="ngModel" email
+            required [ngClass]="{'invalido': (emailId.dirty || emailId.touched ) && emailId.invalid}"></label>
+        <div class="mensaje" *ngIf="(emailId.dirty || emailId.touched ) && emailId.invalid">
+          <span class="error" *ngIf="emailId.errors.required">El campo es obligatorio</span>
+          <span class="error" *ngIf="emailId.errors.email">Escribe un email</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>
+          <span>Contraseña</span>
+          <input type="password" name="password" [(ngModel)]="usuario.password" #passwordId="ngModel" minlength="6"
+            required [ngClass]="{'invalido': (passwordId.dirty || passwordId.touched ) && passwordId.invalid}">
+        </label>
+        <div class="mensaje2" *ngIf="(passwordId.dirty || passwordId.touched ) && passwordId.invalid">
+          <span class="error" *ngIf="passwordId.errors.required">El campo es obligatorio</span>
+          <span class="error" *ngIf="passwordId.errors.minlength">La contraseña debe tener 6 caracteres por lo
+            menos</span>
+        </div>
+      </div>
+      <div class="boton">
+        <button [disabled]="loginForm.invalid">Login</button>
+      </div>
+    </form>
+  </div>
+</div>

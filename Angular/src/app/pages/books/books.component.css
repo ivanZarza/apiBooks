@@ -5,6 +5,13 @@ main {
   background-repeat: repeat-y;
 }
 
+.desenfoque{
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(2px);
+
+}
+
 .rotulo {
   display: flex;
   justify-content: center;

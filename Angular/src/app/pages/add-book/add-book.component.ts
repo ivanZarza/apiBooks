@@ -4,6 +4,7 @@ import { Book } from '../../models/book';
 import { CommonModule } from '@angular/common';
 import { ServiceBookService } from '../../shared/books.service';
 import { ToastrService } from 'ngx-toastr';
+import { UsuarioService } from '../../shared/usuario.service';
 
 @Component({
   selector: 'app-add-book',
@@ -17,34 +18,22 @@ export class AddBookComponent {
   public libroId: number
   public usuarioId: number
   public titulo: string
-  public estilo: string
+  public type: string
   public autor: string
   public precio: number
   public imagenUrl: string
   public libroEncontrado: Book
 
-  constructor(public serviceBookService: ServiceBookService, private toastr: ToastrService) {
+  constructor(public serviceBookService: ServiceBookService, private toastr: ToastrService,  public usuarioService: UsuarioService) { 
 
   }
 
   agregarLibro() {
-    this.libroEncontrado = this.serviceBookService.getOne(this.libroId);
-    if (this.libroEncontrado) {
-      alert('El id del libro ya existe');
-      return;
-    }
+    
+    const nuevoLibro = new Book(this.libroId  = null , this.usuarioId = this.usuarioService.user.id_user, this.titulo, this.type, this.autor, this.precio, this.imagenUrl);
 
-    if (!this.libroId) {
-      alert('El id del libro no puede estar vacio');
-      return;
-    }
-
-    const nuevoLibro = new Book(this.libroId, this.usuarioId, this.titulo, this.estilo, this.autor, this.precio, this.imagenUrl);
-
-    this.libroId
-    this.usuarioId
     this.titulo
-    this.estilo
+    this.type
     this.autor
     this.precio
     this.imagenUrl

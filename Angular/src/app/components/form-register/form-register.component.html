@@ -1,8 +1,9 @@
 <div class="container">
+  <div class="desenfoque">
   <div class="form">
-    <h2>Registro</h2>
-    <form [formGroup]="registerForm">
 
+    <form [formGroup]="registerForm"  (ngSubmit)="registrarse()">
+      <h2>Registro</h2>
       <div class="seccion">
         <label><span>Nombre</span>
           <input type="text" formControlName="nombre"
@@ -37,7 +38,7 @@
       </div>
 
       <div class="seccion">
-        <label><span>URL</span><input type="url" formControlName="url"
+        <label><span>URL de la foto</span><input type="url" formControlName="url"
             [ngClass]="{'invalido': (registerForm.get('url').dirty || registerForm.get('url').touched) && !registerForm.get('url').valid}"></label>
         <div class="mensaje"
           *ngIf="(registerForm.get('url').dirty || registerForm.get('url').touched) && !registerForm.get('url').valid">
@@ -52,7 +53,7 @@
           *ngIf="(registerForm.get('password').dirty || registerForm.get('password').touched) && !registerForm.get('password').valid"
           class="mensaje">
           <p *ngIf="registerForm.get('password').errors.required" class="error">El campo es obligatorio</p>
-          <p *ngIf="registerForm.get('password').errors.minlength" class="error">La contraseña debe tener 6 caracteres</p>
+          <p *ngIf="registerForm.get('password').errors.minlength" class="error">La contraseña debe tener 4 caracteres</p>
         </div>
       </div>
 
@@ -64,8 +65,9 @@
         </div>
       </div>
         <div class="btn">
-          <button [disabled]="registerForm.invalid" (click)="prueba()">Registrarse</button>
+          <button [disabled]="registerForm.invalid">Registrarse</button>
         </div>
     </form>
   </div>
+</div>
 </div>

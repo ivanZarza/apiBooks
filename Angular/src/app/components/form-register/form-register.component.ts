@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, Validators, AbstractControl} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FormBuilder } from '@angular/forms';
+import { UsuarioService } from '../../shared/usuario.service';
+import { User } from '../../models/user';
+import { Router } from '@angular/router';
 
 
 
@@ -17,14 +20,18 @@ export class FormRegisterComponent {
 
   public registerForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  public usuario: UsuarioService;
+
+  constructor(private formBuilder: FormBuilder, private router: Router, private usuarioService: UsuarioService) {
+
+    this.usuario = new UsuarioService();
 
     this.registerForm = this.formBuilder.group({
       nombre: ['', Validators.required],
       apellidos: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       url: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(4)]],
       password2: ['',[ Validators.required,this.noIgual]]  
     });
   }
@@ -41,8 +48,26 @@ private noIgual(control: AbstractControl) {
   
 }
 
-public prueba() {
-  console.log(this.registerForm.value);
-}
+  public async registrarse() {
+    if(this.registerForm.value.password  !== this.registerForm.value.password2) {
+      console.log('Las contraseñas no coinciden');
+      return;
+    }
 
+    const datosModificados = new User(
+      null,
+      this.registerForm.value.nombre,
+      this.registerForm.value.apellidos,
+      this.registerForm.value.email,
+      this.registerForm.value.url,
+      this.registerForm.value.password
+    );
+
+    await this.usuario.register(datosModificados);
+    if (this.usuario.logueado  === true) {
+      this.router.navigate(['/books']);
+      localStorage.setItem('user', JSON.stringify(this.usuario));
+    }
+    this.registerForm.reset();
+  }
 }

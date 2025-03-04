@@ -14,13 +14,13 @@ import { CommonModule } from '@angular/common';
 })
 export class UpdateBookComponent {
 
-  public libroId: number;
-  public usuarioId: number;
-  public titulo: string;
-  public estilo: string;
-  public autor: string;
-  public precio: number;
-  public imagenUrl: string;
+  public id_book: number;
+  public id_user: number;
+  public title: string;
+  public type: string;
+  public author: string;
+  public price: number;
+  public photo: string;
   public libroEncontrado: Book;
   public libroModificado: Book;
 
@@ -28,8 +28,10 @@ export class UpdateBookComponent {
 
   }
 
-  encontrarLibro() {
-    this.libroEncontrado = this.serviceBookService.getOne(this.libroId);
+  async encontrarLibro() {
+  await this.serviceBookService.getBooks({ id_book: this.id_book });
+  this.libroEncontrado = this.serviceBookService.arrayBooks[0];
+  console.log(this.libroEncontrado);
     if (!this.libroEncontrado) {
       this.toastr.success('Libro no encontrado', 'Fallo', {
         toastClass: 'ngx-toastr custom-toast-error',
@@ -37,24 +39,24 @@ export class UpdateBookComponent {
       });
       return;
     }
-    this.usuarioId = this.libroEncontrado.id_user;
-    this.titulo = this.libroEncontrado.title;
-    this.estilo = this.libroEncontrado.type;
-    this.autor = this.libroEncontrado.author;
-    this.precio = this.libroEncontrado.price;
-    this.imagenUrl = this.libroEncontrado.photo;
+    this.id_user = this.libroEncontrado.id_user;
+    this.title = this.libroEncontrado.title;
+    this.type = this.libroEncontrado.type;
+    this.author = this.libroEncontrado.author;
+    this.price = this.libroEncontrado.price;
+    this.photo = this.libroEncontrado.photo;
   }
 
   modificarLibro() {
-    const libroModificado = new Book(this.libroId, this.usuarioId, this.titulo, this.estilo, this.autor, this.precio, this.imagenUrl);
+    const libroModificado = new Book(this.id_book, this.id_user, this.title, this.type, this.author, this.price, this.photo);
 
-    this.libroId;
-    this.usuarioId;
-    this.titulo;
-    this.estilo;
-    this.autor;
-    this.precio;
-    this.imagenUrl;
+    this.id_book = null;
+    this.id_user = null;
+    this.title = '';
+    this.type = '';
+    this.author = '';
+    this.price = null;
+    this.photo = '';
 
     this.serviceBookService.edit(libroModificado);
     this.toastr.success('Libro modificado con exito', 'Exito', {

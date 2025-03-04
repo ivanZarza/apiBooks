@@ -2,14 +2,18 @@
   <h1>MyBooks</h1>
   <h2>Encuentra tu próxima aventura literaria</h2>
   <nav>
-    <a routerLink="/home">Home</a>
-    <a routerLink="/register">Register</a>
-    <a routerLink="/login">Login</a>
-    <a routerLink="/profile">Profile</a>
-    <a routerLink="/books">Books</a>
-    <a routerLink="/addBook">Add Book</a>
-    <a routerLink="/updateBook">Update Book</a>
-
+    <ng-container *ngIf="!estaAutenticado()">
+    <a routerLink="/home" routerLinkActive="active">Home</a>
+    <a routerLink="/register" routerLinkActive="active">Register</a>
+    <a routerLink="/login" routerLinkActive="active">Login</a>
+  </ng-container>
+    <ng-container *ngIf="estaAutenticado()">
+      <a routerLink="/profile" routerLinkActive="active">Profile</a>
+      <a routerLink="/books" routerLinkActive="active">Books</a>
+      <a routerLink="/addBook" routerLinkActive="active">Add Book</a>
+      <a routerLink="/updateBook" routerLinkActive="active">Update Book</a>
+      <a routerLink="/logout" routerLinkActive="active">Logout</a> 
+    </ng-container>
   </nav>
 </header>
 

@@ -18,7 +18,7 @@ justify-content: space-between;
 .sombreado {
   width: 100%;
   height: 100%;
-  background-color: #00000081;
+  background-color: #000000a4;
   color: white;
   display: flex;
   flex-direction: column;
@@ -27,13 +27,13 @@ justify-content: space-between;
 }
 
 
-.sombreado h2 {
-  font-size: 2rem;
+.sombreado h1 {
+  font-size: 3rem;
   margin-bottom: 20px;
 }
 
-.sombreado p {
-  font-size: 1.2rem;
+.sombreado h2 {
+  font-size: 2rem;
   margin-bottom: 20px;
 }
 

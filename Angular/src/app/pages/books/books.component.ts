@@ -4,7 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { Book } from '../../models/book';
 import { CardComponent } from '../../components/card/card.component';
 import { ServiceBookService } from '../../shared/books.service';
+import { UsuarioService } from '../../shared/usuario.service';
 import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-books',
@@ -17,39 +19,36 @@ import { ToastrService } from 'ngx-toastr';
 export class BooksComponent {
 
   public libroId: number;
-  public arrayBooks: Book[] ;
-  public libroEncontrado: Book;
+  public arrayBooks: Book[];
 
-  constructor(public serviceBookService: ServiceBookService, private toastr: ToastrService) {
 
-    this.libroEncontrado = this.serviceBookService.getOne(this.libroId);
-    this.arrayBooks = this.serviceBookService.getAll();
+  constructor(public serviceBookService: ServiceBookService, private toastr: ToastrService, public usuarioService: UsuarioService) {
+    this.arrayBooks = null;
+    this.libroId = null;
+  }
+  public async buscarLibro() {
+
+    try {
+      if (this.libroId) {
+        await this.serviceBookService.getBooks({ id_book: this.libroId, id_user: this.usuarioService.user.id_user });
+        console.log(this.usuarioService.user.id_user);
+        this.arrayBooks = this.serviceBookService.arrayBooks;
+        console.log(this.arrayBooks);
+
+        if (this.arrayBooks.length === 0) {
+          this.toastr.error('No se encontró el libro');
+        }
+      }  else {
+        await this.serviceBookService.getBooks({ id_user: this.usuarioService.user.id_user });
+        console.log(this.usuarioService.user.id_user);
+        this.arrayBooks = this.serviceBookService.arrayBooks;
+        console.log(this.arrayBooks);
+      }
+    } catch (error) {
+      this.toastr.error('Error al buscar el libro');
+    }
   }
 
-  buscarLibro() {
-    this.libroEncontrado = this.serviceBookService.getOne(this.libroId);
-    if (this.libroEncontrado) {
-      this.arrayBooks = [];
-      this.arrayBooks.push(this.libroEncontrado);
-      this.libroId = null;
-      return
-    }
-
-    if(!this.libroId){
-      this.arrayBooks = this.serviceBookService.getAll();
-      this.libroEncontrado = null;
-      return;
-    }
-
-    if(!this.libroEncontrado){
-      this.arrayBooks = this.serviceBookService.getAll();
-      this.toastr.success('Libro no encontrado', 'Fallo', {
-        toastClass: 'ngx-toastr custom-toast-error',
-        positionClass: 'toast-bottom-right'
-      });
-      return;
-    }
-  }
 
 
   ngOnInit() {

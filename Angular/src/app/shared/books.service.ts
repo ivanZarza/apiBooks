@@ -7,54 +7,95 @@ import { Book } from '../models/book';
 })
 export class ServiceBookService {
 
-  private book: Book;
-  private book2: Book;
-  private book3: Book;
-  private book4: Book;
-  private arrayBooks: Book[] = [];
+  private url: string;
+  public arrayBooks: Book[] = [];
 
-  constructor() { 
-    this.book = new Book(1, 1, 'El Señor de los Anillos', 'Fantasia', 'J.R.R. Tolkien', 20, 'https://m.media-amazon.com/images/I/81Hx32a745L._SL1500_.jpg');
-    this.book2 = new Book(2, 1, 'El Hobbit', 'Fantasia', 'J.R.R. Tolkien', 15, 'https://m.media-amazon.com/images/I/81dJWKg3LUL._SL1500_.jpg');
-    this.book3 = new Book(3, 1, 'El Señor de los Anillos', 'Fantasia', 'J.R.R. Tolkien', 20, 'https://m.media-amazon.com/images/I/81Hx32a745L._SL1500_.jpg');
-    this.book4 = new Book(4, 1, 'El Hobbit', 'Fantasia', 'J.R.R. Tolkien', 15, 'https://m.media-amazon.com/images/I/81dJWKg3LUL._SL1500_.jpg');
-    this.arrayBooks.push(this.book, this.book2, this.book3, this.book4);
+  constructor() {
+    this.url = 'http://localhost:3000';
+    this.arrayBooks = null;
   }
 
-  public getAll(): Book[] {
-    return this.arrayBooks;
-  }
-
-  public getOne(id: number): Book {
-    return this.arrayBooks.find(book => book.id_book === id);
-  }
-
-  public add(book: Book): void {
-    this.arrayBooks.push(book);
-  }
-
-  public edit(libro: Book): boolean {
-    const libroEncontrado = this.arrayBooks.find(element => element.id_book === libro.id_book);
-    if (libroEncontrado) {
-      libroEncontrado.id_user = libro.id_user !== undefined ? libro.id_user : libroEncontrado.id_user;
-      libroEncontrado.title = libro.title !== undefined  ? libro.title : libroEncontrado.title;
-      libroEncontrado.type = libro.type !== undefined  ? libro.type : libroEncontrado.type;
-      libroEncontrado.author = libro.author !== undefined ? libro.author : libroEncontrado.author;
-      libroEncontrado.price = libro.price !== undefined ? libro.price : libroEncontrado.price;
-      libroEncontrado.photo = libro.photo !== undefined ? libro.photo : libroEncontrado.photo;
-      return true;
-    } else {
-      return false;
+  public async getBooks({ id_user = null, id_book = null }= {}) {
+    const url = new URL(`${this.url}/books`);
+    try {
+      if(id_user) {
+      url.searchParams.append('id_user', id_user);
     }
+    if(id_book) {
+      url.searchParams.append('id_book', id_book);
+    }
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    });
+    if (!response.ok) {
+      throw new Error('Error en la solicitud');
+    }
+    const data = await response.json();
+    console.log(data.data[0]);
+    this.arrayBooks = data.data;
+    console.log(this.arrayBooks);
+  }
+  catch (error) {
+    console.error('Error:', error);
+  }
+}
+
+  public async add(book: Book) {
+    try {
+      const response = await fetch(`${this.url}/books`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify(book)
+      });
+      if (!response.ok) {
+        throw new Error('Error en la solicitud');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+  }
+}
+
+  public edit(book: Book) {
+    try {
+      const response = fetch(`${this.url}/books`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify(book)
+      });
+      if (!response) {
+        throw new Error('Error en la solicitud');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+
   }
 
-  public delete(id: number): boolean {
-    const libroEncontrado = this.arrayBooks.find(book => book.id_book === id);
-    if (libroEncontrado) {
-      this.arrayBooks = this.arrayBooks.filter(book => book.id_book !== id);
-      return true;
-    } else {
-      return false;
+  public delete(id: number) {
+    try {
+      const response = fetch(`${this.url}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({ id })
+      });
+      if (!response) {
+        throw new Error('Error en la solicitud');
+      }
+    } catch (error) {
+      console.error('Error:', error);
     }
   }
 }

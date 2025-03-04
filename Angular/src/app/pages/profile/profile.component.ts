@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { User } from '../../models/user';
+import { UsuarioService } from '../../shared/usuario.service';
 
 @Component({
   selector: 'app-profile',
@@ -14,42 +15,41 @@ export class ProfileComponent {
   public miClase: string = '';
   public mensaje: string = '';
 
-  constructor() {
-    this.user = new User(1, 'Ivan', 'Zarza Estevez', 'ivanzarzaestevez@gimeil.com', '../../../assets/img/Captura desde 2025-01-02 08-34-45 (copia).png');
-
+  constructor(public usuarioService: UsuarioService) {
+    this.user = new User(usuarioService.user.id_user,usuarioService.user.name, usuarioService.user.last_name, usuarioService.user.email, usuarioService.user.photo, usuarioService.user.password= null);
   }
 
 nombreCompleto(): string {
   return this.user.name + ' ' + this.user.last_name;
 }
 
-lanzarFuncion(nuevoNombre: string, nuevoApellido: string, nuevoEmail: string, nuevaFoto: string): void {
+public async actualizarUsuario(nuevoNombre: string, nuevoApellido: string, nuevoEmail: string, nuevaFoto: string, password1: string, password2: string) {
   if (nuevoNombre === '' && nuevoApellido === '' && nuevoEmail === '' && nuevaFoto === '') {
     this.miClase = 'noUsuario';
     this.mensaje = 'No se ha actualizado nada';
     return;
   }
 
-  if (nuevoNombre === '') {
-    nuevoNombre = this.user.name;
-  }
-  if (nuevoApellido === '') {
-    nuevoApellido = this.user.last_name;
-  }
-  if (nuevoEmail === '') {
-    nuevoEmail = this.user.email;
-  }
-  if (nuevaFoto === '') {
-    nuevaFoto = this.user.photo;
+  if (password1 !== password2) {
+    this.miClase = 'noUsuario';
+    this.mensaje = 'Las contraseñas no coinciden';
+    return;
   }
 
+  this.user.name = nuevoNombre || this.user.name || '';
+  this.user.last_name = nuevoApellido || this.user.last_name || '';
+  this.user.email = nuevoEmail || this.user.email || '';
+  this.user.photo = nuevaFoto || this.user.photo || '';
+  this.user.password = password1 || this.user.password;
 
+
+  await this.usuarioService.actualizarUsuario(this.user);
 
   console.log(this.user.name);
-  this.user.name = nuevoNombre;
-  this.user.last_name = nuevoApellido;
-  this.user.email = nuevoEmail;
-  this.user.photo = nuevaFoto;
+  this.user.name = this.usuarioService.user.name;
+  this.user.last_name = this.usuarioService.user.last_name;
+  this.user.email = this.usuarioService.user.email;
+  this.user.photo = this.usuarioService.user.photo;
   console.log(this.user.name);
   this.miClase = 'usuario';
   this.mensaje = 'Usuario actualizado correctamente';

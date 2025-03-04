@@ -1,9 +1,8 @@
 <div class="container">
-  <div class="desenfoque">
-  <div class="form">
 
+  <div class="form">
+    <h1>Login</h1>
     <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
-      <h2>Login</h2>
       <div class="form-group">
         <label><span>Email</span><input type="email" name="email" [(ngModel)]="user.email" #emailId="ngModel" email
             required [ngClass]="{'invalido': (emailId.dirty || emailId.touched ) && emailId.invalid}"></label>
@@ -29,5 +28,4 @@
       </div>
     </form>
   </div>
-</div>
 </div>

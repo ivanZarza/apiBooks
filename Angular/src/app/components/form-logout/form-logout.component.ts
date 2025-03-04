@@ -5,14 +5,15 @@ import { UsuarioService } from '../../shared/usuario.service';
 import { User } from '../../models/user';
 import { Router } from '@angular/router';
 
+
 @Component({
-  selector: 'app-form-login',
+  selector: 'app-form-logout',
   standalone: true,
   imports: [FormsModule, CommonModule],
-  templateUrl: './form-login.component.html',
-  styleUrls: ['./form-login.component.css']
+  templateUrl: './form-logout.component.html',
+  styleUrl: './form-logout.component.css'
 })
-export class FormLoginComponent {
+export class FormLogoutComponent {
 
   public user: User;
 
@@ -23,11 +24,11 @@ export class FormLoginComponent {
   public async onSubmit(form: NgForm) {
     this.user.email = form.value.email;
     this.user.password = form.value.password;
-    await this.usuario.login(this.user);
-    if (this.usuario.logueado  === true) {
-      this.router.navigate(['/books']);
-      localStorage.setItem('user', JSON.stringify(this.usuario));
+    await this.usuario.logout(this.user);
+    if (this.usuario.logueado === false) {
+      this.router.navigate(['/home']);
     }
     form.resetForm();
   }
 }
+

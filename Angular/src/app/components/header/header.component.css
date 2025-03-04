@@ -37,6 +37,6 @@ header a:hover {
 }
 
 header a.active {
-  color: var(--hover-color);
+  color: rgb(51, 108, 87);
   text-decoration-line: underline ;
 }

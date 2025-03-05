@@ -4,8 +4,9 @@
     <h1>Libros</h1>
   </div>
   <div class="buscar">
-    <label><span>Id del libro</span><input [(ngModel)]="libroId" name="libroId" type="number"></label>
+    <label><span>Id del libro</span><input [(ngModel)]="libroId" name="libroId" type="number">
     <button (click)="buscarLibro()">Buscar</button>
+  </label>
   </div>
   <section *ngIf="arrayBooks?.length > 0; else sinLibros">
     <ng-container *ngFor="let book of arrayBooks; let isEven = even">

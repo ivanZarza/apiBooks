@@ -2,6 +2,7 @@ const { pool } = require('../database');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
+const claveJWT = process.env.claveJWT
 
 const postLogout = async (req, res) => {
   let { email, password } = req.body;

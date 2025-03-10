@@ -2,7 +2,7 @@ const { pool } = require('../database');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
-
+const claveJWT = process.env.claveJWT
 
 const postLogin = async (req, res) => {
   let { email, password } = req.body;
@@ -41,7 +41,7 @@ const postLogin = async (req, res) => {
     return res.status(200).json({ ok: true, message: 'Éxito!!', data: result });
   } catch (error) {
     console.log('es aqui el error');
-    return res.status(500).json({prueba:false, ok: false, message: error.message });
+    return res.status(500).json({ok: false, message: error.message });
   }
 }
 

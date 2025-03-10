@@ -2,6 +2,7 @@ require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const { pool } = require('../database');
 
+const claveJWT = process.env.claveJWT
 
 async function verificarToken(req, res, next) {
 const token = req.cookies.autentificacion;

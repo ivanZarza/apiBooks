@@ -40,6 +40,7 @@ const postLogin = async (req, res) => {
     res.cookie('autentificacion', token, { httpOnly: true, secure: false, sameSite: 'lax' });
     return res.status(200).json({ ok: true, message: 'Éxito!!', data: result });
   } catch (error) {
+    console.log('es aqui el error');
     return res.status(500).json({ ok: false, message: error.message });
   }
 }

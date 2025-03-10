@@ -2,6 +2,9 @@ const { pool } = require('../database');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+const {
+  claveJWT = 'iconico',
+} = process.env
 
 const postRegister = async (req, res) => {
   let { name, last_name, email, photo, password } = req.body;
@@ -33,7 +36,7 @@ const postRegister = async (req, res) => {
     let sql = 'INSERT INTO user (name, last_name, email, photo, password) VALUES (?, ?, ?, ?, ?)';
     let [result] = await pool.query(sql, [name, last_name, email, photo, password]);
     let id = result.insertId;
-    let token = jwt.sign({ id, email }, process.env.claveJWT, { expiresIn: '1h' });
+    let token = jwt.sign({ id, email }, claveJWT, { expiresIn: '1h' });
     res.cookie('autentificacion', token, { httpOnly: true, secure: true, sameSite: 'none' });
     res.status(200).json({ ok: true, message: 'Exito!!', data: result });
     return;

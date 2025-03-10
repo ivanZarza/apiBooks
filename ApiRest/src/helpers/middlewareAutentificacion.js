@@ -9,7 +9,7 @@ const token = req.cookies.autentificacion;
     return res.status(401).json({ok: false, message: 'No hay token'});
   }
 try {
-  const decoded = jwt.verify(token, process.env.claveJWT);
+  const decoded = jwt.verify(token, claveJWT);
   const sql = 'SELECT * FROM user WHERE id_user = ?';
   const user = await pool.query(sql, [decoded.id]);
 

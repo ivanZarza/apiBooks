@@ -2,9 +2,7 @@ const { pool } = require('../database');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const {
-  claveJWT = 'iconico',
-} = process.env
+
 
 const postRegister = async (req, res) => {
   let { name, last_name, email, photo, password } = req.body;

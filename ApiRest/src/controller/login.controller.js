@@ -37,7 +37,7 @@ const postLogin = async (req, res) => {
     let [result] = await pool.query(datosUsuario, [email]);
     let id = result[0].id_user;
     let token = jwt.sign({ id, email }, claveJWT, { expiresIn: '1h' });
-    res.cookie('autentificacion', token, { httpOnly: true, secure: false, sameSite: 'none' });
+    res.cookie('autentificacion', token, { httpOnly: true, secure: true, sameSite: 'none' });
     return res.status(200).json({ ok: true, message: 'Éxito!!', data: result });
   } catch (error) {
     console.log('es aqui el error');

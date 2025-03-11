@@ -6,6 +6,7 @@ const claveJWT = process.env.claveJWT
 
 async function verificarToken(req, res, next) {
 const token = req.cookies.autentificacion;
+console.log(token);
   if(!token) {
     return res.status(401).json({ok: false, message: 'No hay token'});
   }

@@ -11,6 +11,7 @@ const errorHandling = require("./error/errorHandling");
 const verificarToken = require("./helpers/middlewareAutentificacion");
 
 
+console.log('claveJWT', process.env.claveJWT)
 
 const app = express();
 

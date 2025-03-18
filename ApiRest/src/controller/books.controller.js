@@ -58,7 +58,7 @@ const postbooks = async (req, res) => {
 }
 
 const putbooks = async (req, res) => {
-  const {
+  let {
     id_book,
     id_user,
     title,

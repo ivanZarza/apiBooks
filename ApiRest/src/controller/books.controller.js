@@ -68,8 +68,6 @@ const putbooks = async (req, res) => {
     photo
   } = req.body;
 
-  title = title.toLowerCase();
-  author = author.toLowerCase();
 
   if (!id_book || !id_user) {
     res.status(400).json({ ok: false, message: 'Faltan datos' });

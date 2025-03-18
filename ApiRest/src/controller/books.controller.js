@@ -38,14 +38,21 @@ const getbooks = async (req, res) => {
 }
 
 const postbooks = async (req, res) => {
-  let { id_user, title, type, author, price, photo } = req.body;
   console.log(req.body);
+  let { id_user, title, type, author, price, photo } = req.body;
+  console.log('id_user', id_user
+              ,'title', title
+              ,'type', type
+              ,'author', author
+              ,'price', price
+              ,'photo', photo
+  );
   if (!id_user || !title || !type || !author || !price || !photo) {
     res.status(400).json({ ok: false, message: 'Faltan datos' });
     return;
   }
 
-  title  = title.toLowerCase();
+  title = title.toLowerCase();
   author = author.toLowerCase();
 
   try {
@@ -58,6 +65,7 @@ const postbooks = async (req, res) => {
 }
 
 const putbooks = async (req, res) => {
+  console.log(req.body);
   let {
     id_book,
     id_user,

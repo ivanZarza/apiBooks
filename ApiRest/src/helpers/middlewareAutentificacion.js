@@ -24,7 +24,7 @@ try {
     return res.status(401).json({ok: false, message: 'Verificacion del token negativa'});
   }
 
-  req.user = user[0];
+
   console.log('linea 28 middleware token', req.user);
 next();
 

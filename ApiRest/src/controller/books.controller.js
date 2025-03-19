@@ -39,8 +39,8 @@ const getbooks = async (req, res) => {
 
 const postbooks = async (req, res) => {
   console.log(req.body);
-  let { id_user, title, type, author, price, photo } = req.body;
-  console.log('id_user', book.id_user
+  let { id_user, title, type, author, price, photo } = req.body.book;
+  console.log('id_user', id_user
               ,'title', title
               ,'type', type
               ,'author', author
@@ -52,8 +52,6 @@ const postbooks = async (req, res) => {
     return;
   }
 
-  title = title.toLowerCase();
-  author = author.toLowerCase();
 
   try {
     let sql = 'INSERT INTO book (id_user, title, type, author, price, photo) VALUES (?, ?, ?, ?, ?, ?)';

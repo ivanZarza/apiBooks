@@ -25,6 +25,7 @@ try {
   }
 
   req.user = user[0];
+  console.log('linea 28 middleware token', req.user);
 next();
 
 } catch (error) {

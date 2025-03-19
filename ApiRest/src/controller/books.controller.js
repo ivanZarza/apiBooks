@@ -74,26 +74,20 @@ const putbooks = async (req, res) => {
     photo
   } = req.body;
 
-
   if (!id_book || !id_user) {
     res.status(400).json({ ok: false, message: 'Faltan datos' });
-  }
-  sql = 'SELECT * FROM book WHERE id_user = ? AND id_book = ?';
-  let [result] = await pool.query(sql, [id_user, id_book]);
-  if (!result) {
-    res.status(404).json({ ok: false, message: 'No se encontro el libro' });
+    return; 
   }
 
   try {
-    let sql = 'UPDATE book SET title = ?, type = ?, author = ?, price = ?, photo = ? WHERE id_user = ? AND id_book = ?';
-    await pool.query(sql, [title, type, author, price, photo, id_user, id_book]);
-    let sqlActualizado = 'SELECT * FROM book WHERE id_user = ? AND id_book = ?';
-    let [result] = await pool.query(sqlActualizado, [id_user, id_book]);
-    res.status(200).json({ ok: true, message: 'Exito!!', data: result });
+    let sql = 'UPDATE book SET title = ?, type = ?, author = ?, price = ?, photo = ? WHERE id_book = ? AND id_user = ?';
+    let [result] = await pool.query(sql, [title, type, author, price, photo, id_book, id_user]);
+
+    res.status(200).json({ ok: true, message: 'Libro actualizado con éxito', data: result });
   } catch (error) {
     res.status(500).json({ ok: false, message: error.message });
   }
-}
+};
 
 const deletebooks = async (req, res) => {
   const { id_book, id_user } = req.body;

@@ -8,7 +8,6 @@ const registerRouters = require("./routers/register.router");
 const booksRouters = require("./routers/books.router");
 const usuariosRouters = require("./routers/usuarios.router");
 const errorHandling = require("./error/errorHandling");
-const verificarToken = require("./helpers/middlewareAutentificacion");
 
 
 console.log('claveJWT', process.env.claveJWT)
@@ -18,10 +17,13 @@ const app = express();
 app.set("port", process.env.PORT || 3000);
 
 app.use(cors({
-  origin: (origin, callback) => {
+  origin: function (origin, callback) {
+    if (!origin) {
+            return callback(null, true);
+    }
     callback(null, true);
   },
-  credentials: true
+  credentials: true 
 }));
 
 app.use(express.json());

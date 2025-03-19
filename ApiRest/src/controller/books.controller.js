@@ -72,7 +72,7 @@ const putbooks = async (req, res) => {
     author,
     price,
     photo
-  } = req.body;
+  } = req.body.book;
 
   if (!id_book || !id_user) {
     res.status(400).json({ ok: false, message: 'Faltan datos' });

@@ -1,8 +1,8 @@
 const { pool } = require('../database');
-const jwt = require('jsonwebtoken');
+/* const jwt = require('jsonwebtoken'); */
 const bcrypt = require('bcrypt');
 
-const claveJWT = process.env.claveJWT
+/* const claveJWT = process.env.claveJWT */
 
 const postLogin = async (req, res) => {
   let { email, password } = req.body;
@@ -36,9 +36,9 @@ const postLogin = async (req, res) => {
     let datosUsuario = 'SELECT id_user, name, last_name, email, photo FROM user WHERE email = ?';
     let [result] = await pool.query(datosUsuario, [email]);
     let id = result[0].id_user;
-    let token = jwt.sign({ id, email }, claveJWT, { expiresIn: '1h' });
-    res.cookie('autentificacion', token, { httpOnly: true, secure: true, sameSite: 'none' });
-    return res.status(200).json({ ok: true, message: 'Éxito!!', data: result });
+    let token = jwt.sign({ id, email }, claveJWT, { expiresIn: '24h' });
+/*     res.cookie('autentificacion', token, { httpOnly: true, secure: true, sameSite: 'none' });
+ */    return res.status(200).json({ ok: true, message: 'Éxito!!', data: result });
   } catch (error) {
     console.log('es aqui el error');
     return res.status(500).json({ok: false, message: error.message });

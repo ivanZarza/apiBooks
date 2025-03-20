@@ -1,8 +1,8 @@
 const { pool } = require('../database');
-const jwt = require('jsonwebtoken');
+/* const jwt = require('jsonwebtoken'); */
 const bcrypt = require('bcrypt');
 
-const claveJWT = process.env.claveJWT
+/* const claveJWT = process.env.claveJWT */
 
 const postLogout = async (req, res) => {
   let { email, password } = req.body;
@@ -31,8 +31,8 @@ const postLogout = async (req, res) => {
     if (!isMatch) {
       return res.status(400).json({ ok: false, message: 'Contraseña incorrecta' });
     }
-    let token = jwt.sign({ email }, claveJWT, { expiresIn: '1s' });
-    res.cookie('logout', token, { httpOnly: true, secure: true, sameSite: 'none' });
+/*     let token = jwt.sign({ email }, claveJWT, { expiresIn: '1s' });
+    res.cookie('logout', token, { httpOnly: true, secure: true, sameSite: 'none' }); */
 
     return res.status(200).json({ ok: true, message: 'Éxito!!' });
   } catch (error) {

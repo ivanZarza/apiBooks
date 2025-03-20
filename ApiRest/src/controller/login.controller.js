@@ -27,7 +27,7 @@ const postLogin = async (req, res) => {
     }
 
     let passwordHaseado = usuarioRequerido[0].password;
-    console.log('JWT Secret:', claveJWT);
+/*     console.log('JWT Secret:', claveJWT); */
     const isMatch = await bcrypt.compare(password, passwordHaseado);
     if (!isMatch) {
       return res.status(400).json({ ok: false, message: 'Contraseña incorrecta' });
@@ -36,12 +36,13 @@ const postLogin = async (req, res) => {
     let datosUsuario = 'SELECT id_user, name, last_name, email, photo FROM user WHERE email = ?';
     let [result] = await pool.query(datosUsuario, [email]);
     let id = result[0].id_user;
-    let token = jwt.sign({ id, email }, claveJWT, { expiresIn: '24h' });
+/*     let token = jwt.sign({ id, email }, claveJWT, { expiresIn: '24h' }); */
 /*     res.cookie('autentificacion', token, { httpOnly: true, secure: true, sameSite: 'none' });
  */    return res.status(200).json({ ok: true, message: 'Éxito!!', data: result });
   } catch (error) {
     console.log('es aqui el error');
     return res.status(500).json({ok: false, message: error.message });
+    console.log(error);
   }
 }
 

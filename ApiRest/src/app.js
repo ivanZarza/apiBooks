@@ -8,7 +8,7 @@ const registerRouters = require("./routers/register.router");
 const booksRouters = require("./routers/books.router");
 const usuariosRouters = require("./routers/usuarios.router");
 const errorHandling = require("./error/errorHandling");
-const favouriteRouters = require("./routers/favourite.router"); 
+const favoriteRouters = require("./routers/favorite.router"); 
 
 
 /* console.log('claveJWT', process.env.claveJWT)
@@ -39,7 +39,7 @@ app.use((req, res, next) => {
   next();  
 });
 
-app.use(loginRouters, registerRouters, logoutRouters, booksRouters, usuariosRouters, favouriteRouters);
+app.use(loginRouters, registerRouters, logoutRouters, booksRouters, usuariosRouters, favoriteRouters);
 app.use(errorHandling);
 
 

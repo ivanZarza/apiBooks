@@ -1,6 +1,6 @@
 const { pool } = require('../database');
 
-const getFavourites = async (req, res) => {
+const getFavorites = async (req, res) => {
   let { id_user } = req.query;
 
   try {
@@ -9,7 +9,7 @@ const getFavourites = async (req, res) => {
       return;
     }
 
-    const sql = 'SELECT * FROM book WHERE id_user = ? AND favourite = 1';
+    const sql = 'SELECT * FROM book WHERE id_user = ? AND favorite = 1';
     const [result] = await pool.query(sql, [id_user]);
 
     res.status(200).json({ ok: true, message: 'Éxito!!', data: result });
@@ -18,7 +18,7 @@ const getFavourites = async (req, res) => {
   }
 };
 
-const putFavourites = async (req, res) => {
+const putFavorites = async (req, res) => {
   let { id_book, id_user } = req.body;
   console.log('id_user', id_user, 'id_book', id_book);
   
@@ -28,7 +28,7 @@ const putFavourites = async (req, res) => {
   }
 
   try {
-    let sql = 'UPDATE book SET favourite = NOT favourite WHERE id_user = ? AND id_book = ?';
+    let sql = 'UPDATE book SET favorite = NOT favorite WHERE id_user = ? AND id_book = ?';
     let [result] = await pool.query(sql, [id_user, id_book]);
 
     res.status(200).json({ ok: true, message: 'Favorito actualizado con éxito', data: result });
@@ -37,4 +37,4 @@ const putFavourites = async (req, res) => {
   }
 };
 
-module.exports = { getFavourites, putFavourites };
+module.exports = { getFavorites, putFavorites };

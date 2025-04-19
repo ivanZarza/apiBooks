@@ -1,8 +1,8 @@
 const { Router } = require('express');
 const router = Router();
-const favouriteCtrl = require('../controller/favourite.controller');
+const favoriteCtrl = require('../controller/favorite.controller');
 
-router.get('/favourite', favouriteCtrl.getFavourites);
-router.put('/favourite', favouriteCtrl.putFavourites);
+router.get('/favourite', favoriteCtrl.getFavourites);
+router.put('/favourite', favoriteCtrl.putFavourites);
 
 module.exports = router;

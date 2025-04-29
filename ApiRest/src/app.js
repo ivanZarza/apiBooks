@@ -17,6 +17,14 @@ const app = express();
 
 app.set("port", process.env.PORT || 3000);
 
+app.use(function logRequest (req, res, next) {
+  console.log("Peticion recibida del cliente");
+  console.log("URL:",  req.url);
+  console.log("Metodo", req.method);
+  console.log("Headers", req.headers);
+  next();
+})
+
 
 // como restringir dominios 
 const checkIfDomainIsAllowed = (origin) => {

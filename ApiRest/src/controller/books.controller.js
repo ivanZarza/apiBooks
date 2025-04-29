@@ -7,7 +7,7 @@ const getbooks = async (req, res) => {
     if ((id_user === null || id_user === undefined) && (id_book === null || id_book === undefined)) {
       sql = 'SELECT * FROM book';
       let [result] = await pool.query(sql);
-      res.status(200).json({ ok: true, message: 'Exito!!', data: result });
+      res.status(200).json({ ok: true, message: 'Exito!!', data: result, headers: req.headers });
     }
 
 

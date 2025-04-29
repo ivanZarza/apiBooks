@@ -18,7 +18,7 @@ const app = express();
 app.set("port", process.env.PORT || 3000);
 
 
-
+// como restringir dominios 
 const checkIfDomainIsAllowed = (origin) => {
   if (origin.startsWith("http://localhost:")) return true
   if (origin.endsWith(".vercel.app")) return true
@@ -27,6 +27,7 @@ const checkIfDomainIsAllowed = (origin) => {
   return false
 }
 
+// Middleware para habilitar CORS con cabeceras personalizadas
 app.use(function enableCORS (req, res, next) {
   const { origin }  = req.headers
   

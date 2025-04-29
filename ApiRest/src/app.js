@@ -17,7 +17,7 @@ const app = express();
 
 app.set("port", process.env.PORT || 3000);
 
-
+/* 
 // como restringir dominios 
 const checkIfDomainIsAllowed = (origin) => {
   if (origin.startsWith("http://localhost:")) return true
@@ -43,7 +43,14 @@ app.use(function enableCORS (req, res, next) {
     res.header("Access-Control-Allow-Credentials", true);
   }
   next();
-})
+}) */
+
+  app.use(cors({
+    origin: '*', // Permitir cualquier origen
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Métodos permitidos
+    allowedHeaders: ['Content-Type', 'Authorization'], // Encabezados permitidos
+    credentials: true // Permitir cookies y credenciales
+  }));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

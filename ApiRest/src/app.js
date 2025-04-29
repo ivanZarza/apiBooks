@@ -19,14 +19,9 @@ app.set("port", process.env.PORT || 3000);
 
 app.use(cors({
   origin: function (origin, callback) {
-    console.log("origin", origin);
-    if (!origin) {
-            return callback(null, true);
-    }
-    console.log("origin", origin);
-    callback(null, true);
+    callback(error, origin);
   },
-  credentials: true 
+  credentials: true,
 }));
 
 app.use(express.json());

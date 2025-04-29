@@ -24,11 +24,23 @@ app.set("port", process.env.PORT || 3000);
 //   credentials: true,
 // }));
 
+const checkIfDomainIsAllowed = (origin) => {
+  if (/http:\/\/localhost:/.test(origin)) return true
+  if (/\.vercel\.app$/.test(origin)) return true
+  if (/\.github\.io$/.test(origin)) return true
+
+  return false
+}
+
 app.use(function enableCORS (req, res, next) {
-  res.header("Access-Control-Allow-Origin", req.headers.origin);
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.header("Access-Control-Allow-Credentials", true);
+  const { origin }  = req.headers
+  
+  if (checkIfDomainIsAllowed(origin)) {
+    res.header("Access-Control-Allow-Origin", origin);
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    res.header("Access-Control-Allow-Credentials", true);
+  }
   next();
 })
 

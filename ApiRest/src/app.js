@@ -17,17 +17,12 @@ const app = express();
 
 app.set("port", process.env.PORT || 3000);
 
-// app.use(cors({
-//   origin: function (origin, callback) {
-//     callback(error, origin);
-//   },
-//   credentials: true,
-// }));
+
 
 const checkIfDomainIsAllowed = (origin) => {
-  if (/http:\/\/localhost:/.test(origin)) return true
-  if (/\.vercel\.app$/.test(origin)) return true
-  if (/\.github\.io$/.test(origin)) return true
+  if (origin.startsWith("http://localhost:")) return true
+  if (origin.endsWith(".vercel.app")) return true
+  if (origin.endsWith(".github.io")) return true
 
   return false
 }

@@ -1,5 +1,18 @@
 const { pool } = require('../database');
 
+/* const getbooks = async (req) => {
+  let { id_user, id_book } = req.query;
+  try {
+    let sql;
+    if ((id_user === null || id_user === undefined) && (id_book === null || id_book === undefined)) {
+      sql = 'SELECT * FROM book';
+      let [result] = await pool.query(sql);
+      
+      return { status: 200, data: result }
+      // res.status(200).json({ ok: true, message: 'Exito!!', data: result, headers: req.headers });
+      // return
+    }
+ */
 const getbooks = async (req, res) => {
   let { id_user, id_book } = req.query;
   try {
@@ -7,6 +20,7 @@ const getbooks = async (req, res) => {
     if ((id_user === null || id_user === undefined) && (id_book === null || id_book === undefined)) {
       sql = 'SELECT * FROM book';
       let [result] = await pool.query(sql);
+      // return { ok: true, message: 'Exito!!', data: result, headers: req.headers }
       res.status(200).json({ ok: true, message: 'Exito!!', data: result, headers: req.headers });
     }
 

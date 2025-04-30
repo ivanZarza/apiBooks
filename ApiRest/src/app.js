@@ -46,7 +46,9 @@ app.use(function enableCORS (req, res, next) {
 }) */
 
   app.use(cors({
-    origin: '*', // Permitir cualquier origen
+    origin: (origin, callback) => {
+      callback(null, origin || true); // Permitir cualquier origen dinámicamente
+    },
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Métodos permitidos
     allowedHeaders: ['Content-Type', 'Authorization'], // Encabezados permitidos
     credentials: true // Permitir cookies y credenciales
